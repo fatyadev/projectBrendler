@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .search-block {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #netice {
+            margin-top: 30px;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #netice img {
+            width: 300px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        #netice h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        #netice p {
+            font-size: 17px;
+            color: #313131;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Brend Axtarisi</h2>
+
+        <div class="search-block">
+            <input type="text" id="ad" placeholder="Brend adini daxil edin">
+            <button onclick="axtar()">Axtar</button>
+        </div>
+
+        <div id="netice"></div>
+    </div>
+
+    <script>
+        const baza = new Map();
+        baza.set('Zara', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Zara_store_at_Westfield_Sydney.jpg',
+            info: 'Zara — ispan fast fashion brendi, 1974-cü ildə təsis olunub.Zara 1975-ci ildə Amancio Ortega Gaona tərəfindən yaradılmışdır. Zara mağazalarında kişi və qadın geyimləri ilə yanaşı uşaq geyimləri də var (Zara Kids). Zara Home dizaynları Avropa mağazalarında yerləşir. Zara müştərilərinin əksəriyyəti 18-35 yaş arasındadır. Məhsullar dizayn edildikdən sonra mağazalara çatmaq üçün 10-15 gün vaxt lazımdır. Bütün geyimlər İspaniyadakı paylama mərkəzi vasitəsilə emal olunur. Yeni əşyalar yoxlanılır, çeşidlənir, etiketlənir və yük maşınlarına yüklənir. Əksər hallarda paltar 48 saat ərzində çatdırılır. Zara ildə 450 milyondan çox məhsul istehsal edir.Zara həmçinin aksesuarlar, ayaqqabılar, çimərlik paltarları, gözəllik və ətirlər daxildir.2021-ci ilin may ayında Zara ilk gözəllik xəttini - ZARA Beauty-ni təqdim etdi.'
+        });
+        baza.set('Channel', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Chanel_%282514399690%29.jpg',
+            info: 'Channel — fransız dəb evi, 1910 - cu ildə Parisdə Coco Chanel tərəfindən qurulmuş Fransız lüks moda evidir., 2018-ci ildə qurulan və baş ofisi Londonda Chanel Limited holdinq şirkəti vasitəsilə Alainvə Gérard Wertheimer adlı fransız qardaşlarına məxsusdur.Chanel qadın geyimləri , dəbdəbəli mallar və aksesuarlar üzrə ixtisaslaşmışdır və adını və brendini eynək üçün Luxottica -ya lisenziyalaşdırır . Chanel 5 nömrəli ətir və "Chanel kostyumu" ilə məşhurdur . Chanel yüksək moda və hazır geyimdə inqilabi quruluşlu, korsetli siluetləri qadınların hələ də yaltaq hesab etdiyi daha funksional geyimlərlə əvəz etdiyinə görə hesab olunur '
+        });
+        baza.set('Adidas', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Adidas_shop%2C_Albion_Street%2C_Leeds_%2812th_April_2014%29.JPG/1280px-Adidas_shop%2C_Albion_Street%2C_Leeds_%2812th_April_2014%29.JPG',
+            info: 'Adidas — Almaniyanın idman geyim və avadanlıq istehsalçısı.Baş ofisi Herzogenaurach, Bavariya, Almaniyadaalman atletik geyim və ayaqqabı korporasiyasıdır Avropanın ən böyük idman geyim istehsalçısıdır Nike-dan sonra dünyada ikincidir. O,həmçinin Bayern Münhen futbol klubunun və Avstriya fitness texnologiyası şirkəti Runtasticin Adidas Qrupunun holdinq şirkətidir Adidas-ın 2018-ci ildəki gəliri 21,915 milyard avro təşkil edib. '
+        });
+        baza.set('Nike', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Nike_Brickell_City_Centre_-Run-Miami_FL_Feb_2025.jpg/1280px-Nike_Brickell_City_Centre-Run-_Miami_FL_Feb_2025.jpg',
+            info: 'Nike — məşhur Amerika idman brendi. Baş ofisi Oreqon ştatının Beaverton yaxınlığında yerləşən Amerika idman ayaqqabısı və geyim korporasiyasıdır . O , 2022-ci maliyyə ilində 46 milyard ABŞ dollarından çox gəliri ilə dünyanın ən böyük idman ayaqqabısı və geyim tədarükçüsü və idman avadanlıqlarının əsas istehsalçısıdır . 2024-cü ilə qədər bütün dünyada 83,700 nəfəri işə götürdü. 2020-ci ildə təkcə brendin dəyəri 32 milyard dollardan çox olub, bu da onu idman biznesləri arasında ən qiymətli brend edib. Əvvəllər, 2017-ci ildə Nike brendi 29,6 milyard dollar dəyərində qiymətləndirilmişdi. Nike 2018 Fortune 500 siyahısında ABŞ-ın ən böyük korporasiyalarının ümumi gəlirinə görə 89-cu yeri tutdu. Şirkət 2024-cü ildə Forbes Global 2000 şirkətlərində 239-cu yeri tutdu.'
+        });
+        baza.set('Gucci', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/20210718_Gucci_outlet_shop_at_Shanshan_Outlet_Plaza.jpg',
+            info: 'Gucci — İtalyan dəb evi, 1921-ci ildə Toskana , Florensiyada Guccio Gucci (1881-1953) tərəfindən təsis edilmişdir . Onun məhsul xəttinə əl çantaları, hazır geyimlər, ayaqqabılar, aksesuarlar və ev bəzəyi daxildir;, Gucci Beauty adı altında ətir və kosmetika üçün Coty-yə adını və brendini lisenziyalaşdırır. 2024-cü ildə Gucci 20.032 işçisi olan 529 mağaza işlətdi və satışdan 7,65 milyard avro qazandı. Stefano Cantino 2024-cü ilin oktyabrından Gucci şirkətinin baş direktoru, 2025-ci ilin martından isə Demna kreativ direktorudur.'
+        });
+        baza.set('Burberry', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/HK_Central_Pacific_Place_shop_Burberry_clothing_June-2013.JPG/1280px-HK_Central_Pacific_Place_shop_Burberry_clothing_June-2013.JPG',
+            info: 'Burberry 1856-cı ildə keçmiş draper şagirdi olan 21 yaşlı Tomas Burberry İngiltərənin Hempşir əyalətinin Basingstoke şəhərində öz mağazasını açanda yaradılıb. 1870-ci ilə qədər biznes açıq havada geyimlərin inkişafına diqqət yetirərək özünü qurmuşdu. O , paltolar , dəri aksesuarları və ayaqqabılar da daxil olmaqla , geyməyə hazır dizaynlar hazırlayır və paylayır . O , London Fond Birjasında verilmişdir və FTSE 250 İndeksinin tərkib hissəsidir '
+        });
+        baza.set('Prada', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E7%BE%85%E6%B9%96%E5%8D%80_Luohu_%E8%8F%AF%E6%BD%A4%E8%90%AC%E8%B1%A1%E5%9F%8E_MixC_mall_August_2018_SSG_Prada_clothing_shop.jpg/1280px-SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E7%BE%85%E6%B9%96%E5%8D%80_Luohu_%E8%8F%AF%E6%BD%A4%E8%90%AC%E8%B1%A1%E5%9F%8E_MixC_mall_August_2018_SSG_Prada_clothing_shop.jpg',
+            info: '1913-cü ildə qurulan və qurucusu Mario Pradanın ailəsi üçün adlandırılan şirkət, 1970-ci illərdə Marionun nəvəsi Miuccia Prada və əri Patrizio Bertellinin rəhbərliyi altında suya davamlı neylon parçalara keçməzdən əvvəl əvvəlcə idxal olunan ingilis heyvan mallarını satmışdır . 1990-cı illərə qədər Prada lüks marka kimi qəbul edilirdi, dizaynında orijinallığı ilə seçilirdi. Miuccia Prada biznesi inkişaf etdirmək üçün bu müddət ərzində Pradanın törəmə şirkəti olaraq Miu Miu-nu qurdu; şirkət əlavə olaraq Fendi -də ortaq pay almaq üçün LVMH ilə əməkdaşlıq etdi ; Prada Gucci- nin uğursuz alınmasında LVMH-yə daha çox kömək etdi .'
+        });
+        baza.set('Calvin Klein', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E5%8D%97%E5%B1%B1%E5%8D%80_Nanshan_%E8%90%AC%E8%B1%A1%E5%89%8D%E6%B5%B7_Qianhai_MIXC_Shopping_Mall_shop_clothing_Calvin_Klein_July_2024_R12S_01.jpg/1280px-SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E5%8D%97%E5%B1%B1%E5%8D%80_Nanshan_%E8%90%AC%E8%B1%A1%E5%89%8D%E6%B5%B7_Qianhai_MIXC_Shopping_Mall_shop_clothing_Calvin_Klein_July_2024_R12S_01.jpg',
+            info: 'Amerikalı dizayner moda pərakəndə zənciridir və eyniadlı brend məhsullarını bütün dünyada marketinq edir. 1980-ci illərdə dizayner alt paltarları və cins xətləri ilə məşhurlaşan şirkət , orta qiymət seqmentində bütün cinslər və yaş qrupları üçün kütləvi bazarda hazır geyimlər, o cümlədən dəri məhsulları, həyat tərzi aksesuarları və ayaqqabıları, ev əşyaları, parfümeriya /kosmetika, eynək, zərgərlik və saatlar üzrə ixtisaslaşmışdır. Müxtəlif Calvin Klein alt brendlərinin ən yüksək səviyyəsini təmsil edən yüksək səviyyəli uçuş-enmə zolağı moda bölməsi 2019-cu ildə dayandırıldı.'
+        });
+        baza.set('Louis Vuitton', {
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/HK_CWB_%E9%8A%85%E9%91%BC%E7%81%A3_Causeway_Bay_%E6%99%82%E4%BB%A3%E5%BB%A3%E5%A0%B4_Times_Square_mall_Louis_Vuitton_clothing_shop_Nov_2017_IX1.jpg/1920px-HK_CWB_%E9%8A%85%E9%91%BC%E7%81%A3_Causeway_Bay_%E6%99%82%E4%BB%A3%E5%BB%A3%E5%A0%B4_Times_Square_mall_Louis_Vuitton_clothing_shop_Nov_2017_IX1.jpg',
+            info: '1854-cü ildə Louis Vuitton tərəfindən qurulmuş Fransız lüks moda evi. Etiketin LV monoqramı hazır geyimlərə, ayaqqabılara, ətirlərə, saatlara, zərgərlik əşyalarına, aksesuarlara, gün eynəklərinə vəkitablaraqədər məhsullarının əksəriyyətində görünür. Louis Vuitton dünyanın aparıcı beynəlxalq moda evlərindən biridir. O, məhsullarını müstəqilbutiklər, yüksək səviyyəli univermaqlardakı icarə şöbələrivəvebsaytınıne-ticarət bölməsi vasitəsilə satır. Louis Vuitton 1987-ci ildə Moët Hennessy ilə birləşərək törəmə şirkəti olan LVMH-niyaratdıArdıcıl altı il (2006-2012) Louis Vuitton dünyanın ən qiymətli lüks brendi seçildi . Onun 2012-ci ildəki dəyəri 25,9 milyard ABŞ dolları idi. 2013-cü ildə brendin dəyəri 9,4 milyard ABŞ dolları gəlirlə 28,4 milyard ABŞ dolları təşkil etmişdir. Şirkət dünya üzrə 460-dan çox mağazası ilə 50 ölkədə fəaliyyət göstərir.'
+        });
+
+        const axtar = () => {
+            const ad = document.getElementById('ad').value;
+            const netice = document.getElementById('netice');
+
+            if (ad == 'Zara' || ad == 'zara') {
+                const brand = baza.get('Zara');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Zara Logo">
+                    <h3>Zara</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Channel' || ad == 'channel' || ad == 'chanel' || ad == 'Chanel') {
+                const brand = baza.get('Channel');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Channel Logo">
+                    <h3>Channel</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Adidas' || ad == 'adidas') {
+                const brand = baza.get('Adidas');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Adidas Logo">
+                    <h3>Adidas</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Nike' || ad == 'nike') {
+                const brand = baza.get('Nike');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Nike Logo">
+                    <h3>Nike</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Gucci' || ad == 'gucci') {
+                const brand = baza.get('Gucci');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Gucci Logo">
+                    <h3>Gucci</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Burberry' || ad == 'burberry') {
+                const brand = baza.get('Burberry');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Burberry Logo">
+                    <h3>Burberry</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Prada' || ad == 'prada') {
+                const brand = baza.get('Prada');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Prada Logo">
+                    <h3>Prada</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Calvin Klein' || ad == 'calvin klein') {
+                const brand = baza.get('Calvin Klein');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Calvin Klein Logo">
+                    <h3>Calvin Klein</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else if (ad == 'Louis Vuitton' || ad == 'louis vuitton') {
+                const brand = baza.get('Louis Vuitton');
+                netice.innerHTML = `
+                    <img src="${brand.logo}" alt="Louis Vuitton Logo">
+                    <h3>Louis Vuitton</h3>
+                    <p>${brand.info}</p>
+                `;
+            } else {
+                netice.innerHTML = `
+                    <h3>${ad}</h3>
+                    <p>Bu adda brend tapılmadı.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+
+</html>
